@@ -23,6 +23,8 @@ const App = () => {
     (country) => filter === "" || country.name.includes(filter)
   );
 
+  console.log("showList", countriesToShow);
+
   return (
     <div>
       <div>
@@ -34,15 +36,15 @@ const App = () => {
         <p>Too many matches, specify another filter</p>
       )}
 
-      {/* countries name */}
+      {/* countries */}
       {countriesToShow.length < 10 &&
-        countriesToShow.length > 1 &&
-        countriesToShow.map((country) => (
-          <p key={country.name}>{country.name}</p>
+        countriesToShow.map((country, index) => (
+          <Country
+            key={country.name + index}
+            country={country}
+            expanded={countriesToShow.length < 2}
+          />
         ))}
-
-      {/* country info */}
-      {countriesToShow.length === 1 && <Country country={countriesToShow[0]} />}
     </div>
   );
 };
